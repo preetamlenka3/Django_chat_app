@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}
 
-{% block title %} Welcome | {% endblock %}
+{% block title %} Signup | {% endblock %}
 
 {% block content %}
 <div class="p-10 lg:p-20 text-center">
@@ -19,7 +19,7 @@
     <div class="mb-5">
         <label class="text-white">Password</label>
 
-        <input type="password" name="Password1" class="w-full mt-2 px-4 py-2 rounded-xl">
+        <input type="password" name="password1" class="w-full mt-2 px-4 py-2 rounded-xl">
     </div>
 
     <div class="mb-5">
@@ -28,14 +28,30 @@
         <input type="password" name="password2" class="w-full mt-2 px-4 py-2 rounded-xl">
     </div>
 
-    {% if from.errors %}
-        {% for field in form %}
-            {% for error in field.errors %}
-                <div class="mb-5 p-4 rounded-xl bg-red-300 text-white">
-                    <p>{{ error|escape }}</p>
-                </div>
-            {% endfor %}
-        {% endfor %}
+    <!-- {% if form.errors %}
+    {% for field in form %}
+    {% for error in field.errors %}
+    <div class="mb-5 p-4 rounded-xl bg-red-300 text-white">
+        <p>{{ error|escape }}</p>
+    </div>
+    {% endfor %}
+    {% endfor %}
+    {% endif %} -->
+
+    {% if form.error %}
+    {% for field in form %}
+    {% for error in field.errors %}
+    <div class="mb-5 p-4 rounded-xl bg-red-300 text-white">
+        <p>{{ error|escape }}</p>
+    </div>
+    {% endfor %}
+
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+    <div class="mb-5 p-4 rounded-xl bg-red-300 text-white">
+        <p>{{ error|escape }}</p>
+    </div>
+    {% endfor %}
     {% endif %}
 
     <button class="px-5 px-3 rounded-xl text-white bg-teal-800 hover:bg-teal-700">Submit</button>
